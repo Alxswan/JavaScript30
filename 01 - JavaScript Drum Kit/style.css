@@ -1,6 +1,6 @@
 html {
   font-size: 10px;
-  background: url(http://i.imgur.com/b9r5sEL.jpg) bottom center;
+  background: url(http://pixel.nymag.com/imgs/daily/vulture/2015/11/09/09-leslie-odom-jr-hamilton.w1200.h630.jpg) bottom center;
   background-size: cover;
 }
 body,html {
@@ -16,6 +16,8 @@ body,html {
   align-items: center;
   justify-content: center;
 }
+
+
 
 .key {
   border: .4rem solid black;
