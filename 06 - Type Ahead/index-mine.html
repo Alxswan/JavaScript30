@@ -27,9 +27,6 @@ fetch(songEndpoint)
   .then(blob => blob.json())
   .then(data => songs.push(...data))
 
-console.log(songs)
-console.log(lyrics);
-
 function findMatches(wordToMatch, lyrics) {
   return lyrics.filter(lyric =>  {
     const regex = new RegExp(wordToMatch, 'gi')
@@ -47,7 +44,6 @@ function displayMatches() {
   const html = matchArray.map(lyric => {
     const regex = new RegExp(this.value, 'gi')
     const words = lyric.words.replace(regex, `<span class="hl">${this.value}</span>`)
-    console.log(words);
     const songName = findSongName(lyric.id, songs)
     return `
       <li>
@@ -66,7 +62,7 @@ const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('change', displayMatches);
-searchInput.addEventListener('keyup', displayMatches);
+searchInput.addEventListener('keyup input', displayMatches);
 </script>
   </body>
 </html>
