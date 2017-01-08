@@ -7,39 +7,83 @@
 <body>
 
   <div class="container">
-    <div class="box">
-      <a href="./01 - JavaScript Drum Kit/index-mine.html">Day 1: Wait for it</a>
+    <div class="row">
+      <a href="./01 - JavaScript Drum Kit/index-mine.html" title="Day 1: The Room Where It Happens"><div class="box day1"></div></a>
+      <a href="./02 - JS + CSS Clock/index-mine.html" title="Day 2: Non Stop"><div class="box day2"></div></a>
+      <a href="./03 - CSS Variables/index-mine.html" title="Day 3: How you say? No Sweat"><div class="box day3"></div></a>
+      <a href="./04 - Array Cardio Day 1/index-mine.html" title="Day 4: Look around, look around"><div class="box day4"></div></a>
+      <a href="./05 - Flex Panel Gallery/index-mine.html" title="Day 5: The flex was wide enough"><div class="box day5"></div></a>
     </div>
-    <div class="box">
-      <a href="./02 - JS + CSS Clock/index-mine.html">Day 2: Non Stop</a>
+    <div class="row">
+      <a href="./06 - Type Ahead/index-mine.html" title="Day 6: I know where to find you"><div class="box day6"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
     </div>
-    <div class="box">
-      <a href="./03 - CSS Variables/index-mine.html">Day 3: How you say? No Sweat</a>
+    <div class="row">
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
     </div>
-    <div class="box">
-      <a href="./04 - Array Cardio Day 1/index-FINISHED.html">Day 4: Look around, look around</a>
+    <div class="row">
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
     </div>
-    <div class="box">
-      <a href="./05 - Flex Panel Gallery/index-mine.html">Day 5: The flex was wide enough</a>
+    <div class="row">
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+    </div>
+    <div class="row">
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
+      <a href=""><div class="box day"></div></a>
     </div>
   </div>
 
   <style>
+  body {
+    margin: 0;
+  }
+  .day1 {background-image: url(Images/day1.png);}
+  .day2 {background-image: url(Images/day2.png);}
+  .day3 {background-image: url(Images/day3.png);}
+  .day4 {background-image: url(Images/day4.png);}
+  .day5 {background-image: url(Images/day5.png);}
+  .day6 {background-image: url(Images/day6.png);}
+  .box {background-color: white; border: 1px solid black}
   .container {
-    width: 50vw;
-    height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    max-width: 100vw;
+    max-height: 100vh;
     flex-direction: column;
-
+  }
+  .row {
+    flex: 1 0 auto;
+    display: flex;
+    align-items:center;
+    justify-content: center;
   }
 
   .box {
+    background-size: cover;
+    background-repeat: no-repeat;
     flex: 1 0 auto;
-    width: 100%;
-    height: 10%;
+    width: 20vw;
+    height: 16.6vh;
     align-items: center;
   }
   </style>

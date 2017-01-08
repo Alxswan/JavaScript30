@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="Type in a Hamilton Lyric">
+    <ul class="suggestions">
+      <li><span class="name">Song</span><span class="character">Character</span></li>
+      <li><span class="words">Lyric</span></li>
+    </ul>
+  </form>
+<script>
+const lyricEndpoint = 'https://raw.githubusercontent.com/anbnyc/hamilton/gh-pages/data/longLyrics.json';
+const songEndpoint = 'https://raw.githubusercontent.com/anbnyc/hamilton/gh-pages/data/albumTracks.json'
+const lyrics = [];
+const songs = []
+fetch(lyricEndpoint)
+  .then(blob => blob.json())
+  .then(data => lyrics.push(...data))
+
+fetch(songEndpoint)
+  .then(blob => blob.json())
+  .then(data => songs.push(...data))
+
+console.log(songs)
+console.log(lyrics);
+
+function findMatches(wordToMatch, lyrics) {
+  return lyrics.filter(lyric =>  {
+    const regex = new RegExp(wordToMatch, 'gi')
+    return lyric.words.match(regex)
+  })
+}
+
+function findSongName(id, songs){
+  const song = songs.filter(song => (song.id === parseFloat(id)))
+  return song[0].trackName
+}
+
+function displayMatches() {
+  const matchArray = findMatches(this.value, lyrics)
+  const html = matchArray.map(lyric => {
+    const songName = findSongName(lyric.id, songs)
+    return `
+      <li>
+        <span class="name">${lyric.id} ${songName}</span>
+        <span class="character">${lyric.character}</span>
+      </li>
+      <li>
+
+        <span class="words">${lyric.words}</span>
+      </li>
+      `
+  }).join('')
+  suggestions.innerHTML = html;
+}
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);
+</script>
+  </body>
+</html>
