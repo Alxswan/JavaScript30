@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Cardio 💪💪</title>
+</head>
+<body>
+  <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+  <script>
+    // ## Array Cardio Day 2
+
+    const people = [
+      { name: 'Lin', year: 1980 },
+      { name: 'Tommy', year: 1978 },
+      { name: 'Alex', year: 1975 },
+      { name: 'Andy', year: 1970 }
+    ];
+
+    const events = [
+      { text: 'New York City', id: 1776 },
+      { text: 'A Winters Ball', id: 1780 },
+      { text: 'The Battle Of Yorktown', id: 1781 },
+      { text: 'What\'d I miss?', id: 1789 },
+      { text: 'The Election', id: 1800 }
+    ];
+
+    // Some and Every Checks
+    // Array.prototype.some() // is at least one person 19 or older?
+    console.table(people)
+    const isAdult = people.some((person) =>{
+      const currentYear = (new Date().getFullYear())
+    return currentYear - person.year >= 19
+    })
+
+    console.log(isAdult);
+    // Array.prototype.every() // is everyone 19 or older?
+    const allAdults = people.every((person) =>{
+      const currentYear = (new Date().getFullYear())
+      return currentYear - person.year >= 19
+    })
+    console.log(allAdults);
+
+    // Array.prototype.find()
+    // Find is like filter, but instead returns just the one you are looking for
+    // find the comment with the ID of 823423
+    const event = events.find((event) => {
+      return event.id === 1789
+    })
+    console.log(event)
+
+    // Array.prototype.findIndex()
+    // Find the event with this ID
+    // delete the event with the ID of 823423
+    const index = events.findIndex((event) => event.id === 1789)
+    console.log(index)
+    const newEvents = [
+      ...events.slice(0,index),
+      ...events.slice(index + 1)
+    ]
+    console.table(events)
+    console.table(newEvents)
+
+  </script>
+  <style>
+    body {
+      background-image: url(https://tribzap2it.files.wordpress.com/2016/06/lin-manuel-miranda-hamilton.jpg);
+      background-size: cover;
+    }
+    p {
+      color: #e2d0c6;
+    }
+  </style>
+</body>
+</html>
