@@ -7,3 +7,5 @@ My take on Wes Bos' JavaScript30 challenge
 Grab the course at [https://JavaScript30.com](https://JavaScript30.com)
 
 Text-based guides (unofficial) for the challenges can be found here - [Text Guides](https://github.com/nitishdayal/JavaScript30).
+
+Day Six contains data from https://github.com/anbnyc/hamilton

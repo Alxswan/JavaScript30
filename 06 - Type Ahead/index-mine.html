@@ -45,6 +45,9 @@ function findSongName(id, songs){
 function displayMatches() {
   const matchArray = findMatches(this.value, lyrics)
   const html = matchArray.map(lyric => {
+    const regex = new RegExp(this.value, 'gi')
+    const words = lyric.words.replace(regex, `<span class="hl">${this.value}</span>`)
+    console.log(words);
     const songName = findSongName(lyric.id, songs)
     return `
       <li>
@@ -52,8 +55,7 @@ function displayMatches() {
         <span class="character">${lyric.character}</span>
       </li>
       <li>
-
-        <span class="words">${lyric.words}</span>
+        <span class="words">${words}</span>
       </li>
       `
   }).join('')
