@@ -17,31 +17,45 @@
 <script>
 const lyricEndpoint = 'https://raw.githubusercontent.com/anbnyc/hamilton/gh-pages/data/longLyrics.json';
 const songEndpoint = 'https://raw.githubusercontent.com/anbnyc/hamilton/gh-pages/data/albumTracks.json'
-const lyrics = [];
-const songs = []
+let lyrics;
+let songs;
+
 fetch(lyricEndpoint)
   .then(blob => blob.json())
-  .then(data => lyrics.push(...data))
+  .then(data => {
+      lyrics = data.map(
+        line => (
+          { character : line.character
+          , words     : line.words
+          , id        : parseFloat(line.id, 10)
+        })
+      )
+  })
 
 fetch(songEndpoint)
   .then(blob => blob.json())
-  .then(data => songs.push(...data))
+  .then(data => {
+    songs = data.map(
+      song => (
+        { id        : song.id
+        , trackName : song.trackName
+        }
+      )
+    )
+  })
+
+
+  function findSongName(id, songs) {
+    return songs.find(song => song.id === id).trackName
+  }
 
 function findMatches(wordToMatch, lyrics) {
-  return lyrics.filter(lyric =>  {
-    const regex = new RegExp(wordToMatch, 'gi')
-    return lyric.words.match(regex)
-  })
-}
-
-function findSongName(id, songs){
-  const song = songs.filter(song => (song.id === parseFloat(id)))
-  return song[0].trackName
+  const regex = new RegExp(wordToMatch, 'gi')
+  return lyrics.filter(lyric =>  regex.test(lyric.words) )
 }
 
  function displayMatches() {
-  console.log(this.value)
-  if (this.value.length < 2) {
+  if (this.value.length === 0) {
     const html = `
       <li><span class="name">Song</span><span class="character">Character</span></li>
       <li><span class="words">Lyric</span></li>`
@@ -49,8 +63,8 @@ function findSongName(id, songs){
     return
   }
   const matchArray = findMatches(this.value, lyrics)
+  const regex = new RegExp(this.value, 'gi')
   const html = matchArray.map(lyric => {
-    const regex = new RegExp(this.value, 'gi')
     const words = lyric.words.replace(regex, `<span class="hl">${this.value}</span>`)
     const songName = findSongName(lyric.id, songs)
     return `
