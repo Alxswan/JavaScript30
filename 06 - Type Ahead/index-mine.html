@@ -39,7 +39,15 @@ function findSongName(id, songs){
   return song[0].trackName
 }
 
-function displayMatches() {
+ function displayMatches() {
+  console.log(this.value)
+  if (this.value.length < 2) {
+    const html = `
+      <li><span class="name">Song</span><span class="character">Character</span></li>
+      <li><span class="words">Lyric</span></li>`
+      suggestions.innerHTML = html
+    return
+  }
   const matchArray = findMatches(this.value, lyrics)
   const html = matchArray.map(lyric => {
     const regex = new RegExp(this.value, 'gi')
@@ -55,7 +63,8 @@ function displayMatches() {
       </li>
       `
   }).join('')
-  suggestions.innerHTML = html;
+
+  suggestions.innerHTML = html
 }
 
 const searchInput = document.querySelector('.search');
