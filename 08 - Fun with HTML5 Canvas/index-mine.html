@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+
+  if (Math.random() >= 0.5) {
+    console.log('here')
+  document.documentElement.style.setProperty(`--url`, "url('http://www.hamiltonbroadway.com/_img/people-footer.png')")
+  }
+
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.strokeStyle = '#BADA55';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = 100;
+  ctx.lineCap = 'square';
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  //ctx.globalCompositeOperation = 'lighter'
+
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  let hue = 0;
+  let direction = true;
+
+  function draw(e) {
+    if (!isDrawing) return;
+    ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 0.6)`;
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+
+    hue++;
+    if (hue > 360) {
+      hue = 0
+    }
+    if (ctx.lineWidth >=300 || ctx.lineWidth <= 60) {
+      direction = !direction;
+    }
+    direction === true ? ctx.lineWidth++ : ctx.lineWidth--;
+    const half = ctx.lineWidth / 2
+    const xTopLeft = e.offsetX - half
+    const yTopLeft = e.offsetY - half
+    ctx.clearRect(xTopLeft, yTopLeft, ctx.lineWidth, ctx.lineWidth)
+
+  }
+
+
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY]
+  })
+  canvas.addEventListener('mousemove', draw)
+  canvas.addEventListener('mouseup', () => isDrawing = false)
+  canvas.addEventListener('mouseout', () => isDrawing = false)
+
+</script>
+
+<style>
+  :root {
+  --url: url('https://s-media-cache-ak0.pinimg.com/originals/a1/de/e5/a1dee53ddb04d99217dbb8cc8b985b6f.png');
+}
+  html, body {
+    margin:0;
+  }
+  canvas {
+    background-image: var(--url);
+
+  }
+</style>
+
+</body>
+</html>
