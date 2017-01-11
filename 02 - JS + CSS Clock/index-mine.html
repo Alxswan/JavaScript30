@@ -104,19 +104,19 @@
   const topOffSet = 94;
   let topSet;
   if (initialSeconds < 30) {
-    if (initialSeconds <= 20) {
+    if (initialSeconds < 20) {
       topSet = topOffSet - initialSeconds
     }
     else {
-      topSet = topOffSet + (30 - initialSeconds)
+      topSet = topOffSet - 20 + (initialSeconds - 20)
     }
   }
   else {
-    if (initialSeconds <= 50) {
-      topSet = topOffSet - (initialSeconds - 30)
+    if (initialSeconds < 50) {
+      topSet = topOffSet - 10 + (initialSeconds - 30)
     }
     else {
-    topSet = topOffSet + (initialSeconds - 30)
+    topSet = topOffSet + (initialSeconds - 50)
     }
   }
   secondHand.style.top = topSet + 'px'
